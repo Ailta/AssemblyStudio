@@ -8,4 +8,12 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="FinalT.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="FinalT.png" />
+  </ItemGroup>
+
 </Project>

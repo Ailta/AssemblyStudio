@@ -5,34 +5,109 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AssemblyStudio"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="{x:Null}"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="Foreground" Value="#FFD6D6D6"/>
+            <Setter Property="FontSize" Value="11" />
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{x:Null}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FF5F5F5F"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontSize" Value="12" />
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="RichTextBox">
+            <Setter Property="Background" Value="{x:Null}"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="Foreground" Value="#FFD6D6D6"/>
+            <Setter Property="CaretBrush" Value="#FFD6D6D6"/>
+        </Style>
+        <Style TargetType="ScrollBar">
+            <Setter Property="Background" Value="#FF2E2E2E" />
+            <Setter Property="BorderBrush" Value="#FF2E2E2E" />
+            <Setter Property="Foreground" Value="#FF4D4D4D" />
+            <Setter Property="Width" Value="12" />
+            <Setter Property="MinWidth" Value="12" />
+            <Setter Property="Padding" Value="3" />
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="#FF1F1F1F">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="10" />
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="35" />
+            <RowDefinition Height="61" />
             <RowDefinition Height="1*" />
+            <RowDefinition Height="1.5" />
         </Grid.RowDefinitions>
-        <Grid>
+        
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3" />
+                <RowDefinition Height="25" />
+                <RowDefinition Height="25" />
+                <RowDefinition Height="10" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="55" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Button Width="55" Height="22" Content="Settings" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25" />
+                    <ColumnDefinition Width="25" />
+                    <ColumnDefinition Width="25" />
+                    <ColumnDefinition Width="25" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Content="Save" HorizontalAlignment="Center" VerticalAlignment="Center" Width="25" Height="25"/>
+                <Button Grid.Column="1" Content="SaveAll" HorizontalAlignment="Center" VerticalAlignment="Center" Width="25" Height="25"/>
+                <Button Grid.Column="2" Content="Run" HorizontalAlignment="Center" VerticalAlignment="Center" Width="25" Height="25"/>
+                <Button Grid.Column="3" Content="Build" HorizontalAlignment="Center" VerticalAlignment="Center" Width="25" Height="25"/>
+            </Grid>
+        </Grid>
+
+        <Grid x:Name="textEditor" Grid.Row="1" Grid.Column="1" Background="#FF1A1A1A">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="10" />
-                <ColumnDefinition Width="20" />
-                <ColumnDefinition Width="5" />
-                <ColumnDefinition Width="20" />
-                <ColumnDefinition Width="5" />
-                <ColumnDefinition Width="20" />
-                <ColumnDefinition Width="5" />
-                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="50" />
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="10" />
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="20" />
-                <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
-            <Button Grid.Column="1" Grid.Row="1" Content="Save" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Button Grid.Column="3" Grid.Row="1" Content="SaveAll" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Button Grid.Column="5" Grid.Row="1" Content="Run" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Button Grid.Column="7" Grid.Row="1" Content="Build" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <ScrollViewer Grid.Column="0" ScrollChanged="ScrollChanged" x:Name="lineIndexScroll" Foreground="{x:Null}" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
+                <Grid x:Name="lineIndex"/>
+            </ScrollViewer>
+            <ScrollViewer Grid.Column="1" ScrollChanged="ScrollChanged" x:Name="textBoxScroll" Foreground="{x:Null}" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
+                <Grid x:Name="textBox" />
+            </ScrollViewer>
+            <RichTextBox Grid.Column="1" x:Name="richTextBox" ScrollViewer.ScrollChanged="ScrollChanged" VerticalScrollBarVisibility="Visible" BorderThickness="0" SelectionChanged="SelectionChanged" PreviewKeyDown="richTextBox_PreviewKeyDown" />
         </Grid>
     </Grid>
 </Window>
