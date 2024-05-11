@@ -1,0 +1,28 @@
+﻿<Page
+    x:Class="src.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:src"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Background="#FF1F1F1F">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="2*" />
+        </Grid.RowDefinitions>
+        <!-- Nav -->
+        <Grid>
+            <RichEditBox x:Name="test" TextWrapping="NoWrap" IsEnabled="False" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False"/>
+            
+
+        </Grid>
+        <StackPanel>
+            <TextBlock Text="Static Text " />
+            <TextBox Text="Editable Text" IsReadOnly="True" />
+            <TextBlock Text=" More Static Text" />
+        </StackPanel>
+    </Grid>
+</Page>
