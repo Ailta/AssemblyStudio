@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AssemblyStudio"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded" WindowStyle="None">
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
 
     <Window.Resources>
         <Style TargetType="Button">
@@ -57,37 +57,34 @@
         </Grid.RowDefinitions>
 
         <!-- Nav -->
-        <Grid x:Name="grid" Grid.Row="0" MouseEnter="Grid_MouseEnter">
+        <Grid x:Name="NavGrid" Grid.Row="0">
             <Button Content="Settings" Margin="7, 0, 0, 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="55" Height="25"/>
 
-            <Button Content="Save" Margin="72, 0, 0, 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="25" Height="22"/>
+            <Button Content="Save" Margin="72, 0, 0, 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="25" Height="25"/>
             <Button Content="SaveAll" Margin="94, 0, 0, 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="25" Height="25"/>
             <Button Content="Run" Margin="116, 0, 0, 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="25" Height="25"/>
             <Button Content="Build" Margin="138, 0, 0, 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="25" Height="25"/>
-
-            <Button Content="Exit" Margin="0, 0, 0, 0" HorizontalAlignment="Right" VerticalAlignment="Center" Width="25" Height="25"/>
-            <Button Content="Maximize" Margin="0, 0, 25, 0" HorizontalAlignment="Right" VerticalAlignment="Center" Width="25" Height="25"/>
-            <Button Content="Minimize" Margin="0, 0, 50, 0" HorizontalAlignment="Right" VerticalAlignment="Center" Width="25" Height="25"/>
-
-            <Rectangle HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="{Binding ActualWidth, ElementName=grid, Mode=OneWay}" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseEnter="Grid_MouseEnter"/>
         </Grid>
 
-        <Grid x:Name="textEditor" Grid.Row="1" Grid.Column="1" Background="#FF1A1A1A">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
+        <!-- Main -->
+        <Grid Grid.Row="1" Grid.Column="1" Background="#FF1A1A1A">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50" />
                 <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="10" />
             </Grid.ColumnDefinitions>
-            <ScrollViewer Grid.Column="0" ScrollChanged="ScrollChanged" x:Name="lineIndexScroll" Foreground="{x:Null}" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
-                <Grid x:Name="lineIndex"/>
+            
+            <!-- LineIndexer -->
+            <ScrollViewer Grid.Column="0" ScrollChanged="ScrollChanged" x:Name="LineIndexScrollViewer" Foreground="{x:Null}" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
+                <Grid x:Name="LineIndexGrid"/>
             </ScrollViewer>
-            <ScrollViewer Grid.Column="1" ScrollChanged="ScrollChanged" x:Name="textBoxScroll" Foreground="{x:Null}" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
-                <Grid x:Name="textBox" />
+            
+            <!-- TextEditorHelper -->
+            <ScrollViewer Grid.Column="1" ScrollChanged="ScrollChanged" x:Name="TextEditorHelperScrollViewer" Foreground="{x:Null}" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
+                <Grid x:Name="TextEditorHelperGrid" />
             </ScrollViewer>
-            <RichTextBox Grid.Column="1" x:Name="richTextBox" ScrollViewer.ScrollChanged="ScrollChanged" VerticalScrollBarVisibility="Visible" BorderThickness="0" SelectionChanged="SelectionChanged" PreviewKeyDown="richTextBox_PreviewKeyDown" />
+            
+            <!-- TextEditor -->
+            <RichTextBox Grid.Column="1" x:Name="TextEditor" Padding="0" Margin="0" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Visible" BorderThickness="0" ScrollViewer.ScrollChanged="ScrollChanged" SelectionChanged="SelectionChanged" TextChanged="EditTextEditor"/>
         </Grid>
     </Grid>
 </Window>
