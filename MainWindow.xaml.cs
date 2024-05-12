@@ -184,7 +184,7 @@ namespace AssemblyStudio
 
         private void richTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter)
+            /*if (e.Key == Key.Enter)
             {
                 // Create a new paragraph and insert it after the current paragraph
                 Paragraph newParagraph = new Paragraph(new Run(""));
@@ -195,12 +195,28 @@ namespace AssemblyStudio
                 richTextBox.CaretPosition = newParagraph.ContentStart;
 
                 e.Handled = true;
-            }
+            }*/
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             setTextEditor();
+        }
+
+        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
+            Debug.WriteLine("hello?");
+        }
+
+        private void Grid_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
+            Debug.WriteLine("bye?");
+        }
+
+        private void Grid_MouseEnter(object sender, MouseEventArgs e) {
+            Debug.WriteLine("f");
+        }
+
+        private void Rectangle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
+            Debug.WriteLine("hello?");
         }
     }
 }
