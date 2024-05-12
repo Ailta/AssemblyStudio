@@ -22,7 +22,7 @@ namespace AssemblyStudio {
             return lineNumber;
         }
 
-        public SolidColorBrush ConvertHexToSolidColorBrush(string hex) {
+        private SolidColorBrush ConvertHexToSolidColorBrush(string hex) {
             hex = hex.Replace("#", string.Empty);
 
             byte a = (byte)(Convert.ToUInt32(hex.Substring(0, 2), 16));
@@ -48,32 +48,6 @@ namespace AssemblyStudio {
             double lineHeight = formattedText.Height;
 
             return lineHeight;
-        }
-
-        private Label createLabel(string text, int fontSize, SolidColorBrush fontColor, double[] size, Thickness padding, Thickness margin) {
-            Label label = new Label();
-
-            label.Content = text;
-            label.FontSize = fontSize;
-            label.Foreground = fontColor;
-            label.Height = size[1];
-            label.Padding = new Thickness(0);
-            label.Margin = new Thickness(0);
-            label.BorderThickness = new Thickness(0);
-            label.FontFamily = new FontFamily("Consolas");
-
-            return label;
-        }
-
-        private Border createBorder(SolidColorBrush fontColor, double rowHeight, int line) {
-            Border border = new Border();
-            border.Height = rowHeight;
-            border.BorderThickness = new Thickness(2);
-            border.BorderBrush = fontColor;
-
-            Grid.SetRow(border, line);
-
-            return border;
         }
 
         /*private bool windowMaximized = false;

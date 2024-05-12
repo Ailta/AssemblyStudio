@@ -17,6 +17,7 @@ namespace AssemblyStudio {
 
         public MainWindow() {
             InitializeComponent();
+            prepareStyles();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
@@ -30,26 +31,30 @@ namespace AssemblyStudio {
             }
         }
 
+        private int prevLine = 0;
         private void EditTextEditor(object? sender, RoutedEventArgs? e) {
             TextRange textRange = new TextRange(TextEditor.Document.ContentStart, TextEditor.Document.ContentEnd);
             string[] lines = textRange.Text.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
 
-            double rowHeight = GetLineHeightInPixels(TextEditor);
+            if (((prevLine != lines.Length) && sender != null) || sender == null) {
+                prevLine = lines.Length;
+                double rowHeight = GetLineHeightInPixels(TextEditor);
 
-            LineIndexGrid.Children.Clear();
-            LineIndexGrid.RowDefinitions.Clear();
-            TextEditorHelperGrid.RowDefinitions.Clear();
-            labelsLineIndex.Clear();
+                LineIndexGrid.Children.Clear();
+                LineIndexGrid.RowDefinitions.Clear();
+                TextEditorHelperGrid.RowDefinitions.Clear();
+                labelsLineIndex.Clear();
 
-            for (int i = 0; i < lines.Length - 1; i++) {
-                LineIndexGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(rowHeight, GridUnitType.Pixel) });
-                TextEditorHelperGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(rowHeight, GridUnitType.Pixel) });
+                for (int i = 0; i < lines.Length - 1; i++) {
+                    LineIndexGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(rowHeight, GridUnitType.Pixel) });
+                    TextEditorHelperGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(rowHeight, GridUnitType.Pixel) });
 
-                Label label = createLabel($"{i}", fontSize, ConvertHexToSolidColorBrush("#FF666666"), [0, rowHeight], new Thickness(0), new Thickness(0));
-                Grid.SetRow(label, i);
+                    Label label = createLabel($"{i}", fontSize, fontColorDarker, [0, rowHeight], new Thickness(0, 0, 10, 0), new Thickness(0));
+                    Grid.SetRow(label, i);
 
-                LineIndexGrid.Children.Add(label);
-                labelsLineIndex.Add(label);
+                    LineIndexGrid.Children.Add(label);
+                    labelsLineIndex.Add(label);
+                }
             }
         }
 
@@ -58,12 +63,12 @@ namespace AssemblyStudio {
 
             int caretLinePos = GetCaretPosition(TextEditor);
             double rowHeight = GetLineHeightInPixels(TextEditor);
-            TextEditorHelperGrid.Children.Add(createBorder(ConvertHexToSolidColorBrush("#FF4D4D4D"), rowHeight, caretLinePos));
+            TextEditorHelperGrid.Children.Add(createBorder(fontColorSubtle, rowHeight, caretLinePos));
 
             EditTextEditor(null, null);
 
             Label tmpLabel = labelsLineIndex[caretLinePos];
-            tmpLabel.Foreground = ConvertHexToSolidColorBrush("#FFD6D6D6");
+            tmpLabel.Foreground = fontColorLight;
             LineIndexGrid.Children[caretLinePos] = tmpLabel;
         }
 

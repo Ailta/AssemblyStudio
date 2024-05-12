@@ -67,9 +67,9 @@
         </Grid>
 
         <!-- Main -->
-        <Grid Grid.Row="1" Grid.Column="1" Background="#FF1A1A1A">
+        <Grid Grid.Row="1" Grid.Column="1" Margin="10, 0, 10, 10" Background="#FF1A1A1A">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="65" />
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
             
@@ -84,7 +84,7 @@
             </ScrollViewer>
             
             <!-- TextEditor -->
-            <RichTextBox Grid.Column="1" x:Name="TextEditor" Padding="0" Margin="0" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Visible" BorderThickness="0" ScrollViewer.ScrollChanged="ScrollChanged" SelectionChanged="SelectionChanged" TextChanged="EditTextEditor"/>
+            <RichTextBox Grid.Column="1" x:Name="TextEditor" Padding="0" Margin="0" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Auto" BorderThickness="0" ScrollViewer.ScrollChanged="ScrollChanged" SelectionChanged="SelectionChanged" TextChanged="EditTextEditor"/>
         </Grid>
     </Grid>
 </Window>
