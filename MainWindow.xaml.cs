@@ -11,7 +11,6 @@ namespace AssemblyStudio {
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
-        List<Label> labelsLineIndex = new List<Label>();
         private int fontSize = 15;
         private int lineHeight = 10;
 
@@ -31,6 +30,9 @@ namespace AssemblyStudio {
             }
         }
 
+        // This is not very fast, optimize it in the future
+        // To be honest, it would be better to use some other way to create
+        // a project like this
         private int prevLine = 0;
         private void EditTextEditor(object? sender, RoutedEventArgs? e) {
             TextRange textRange = new TextRange(TextEditor.Document.ContentStart, TextEditor.Document.ContentEnd);
@@ -43,7 +45,6 @@ namespace AssemblyStudio {
                 LineIndexGrid.Children.Clear();
                 LineIndexGrid.RowDefinitions.Clear();
                 TextEditorHelperGrid.RowDefinitions.Clear();
-                labelsLineIndex.Clear();
 
                 for (int i = 0; i < lines.Length - 1; i++) {
                     LineIndexGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(rowHeight, GridUnitType.Pixel) });
@@ -53,7 +54,6 @@ namespace AssemblyStudio {
                     Grid.SetRow(label, i);
 
                     LineIndexGrid.Children.Add(label);
-                    labelsLineIndex.Add(label);
                 }
             }
         }
@@ -67,9 +67,9 @@ namespace AssemblyStudio {
 
             EditTextEditor(null, null);
 
-            Label tmpLabel = labelsLineIndex[caretLinePos];
-            tmpLabel.Foreground = fontColorLight;
-            LineIndexGrid.Children[caretLinePos] = tmpLabel;
+            Label label = createLabel($"{caretLinePos}", fontSize, fontColorLight, [0, rowHeight], new Thickness(0, 0, 10, 0), new Thickness(0));
+            Grid.SetRow(label, caretLinePos);
+            LineIndexGrid.Children[caretLinePos] = label;
         }
 
         private void ScrollChanged(object sender, ScrollChangedEventArgs e) {
