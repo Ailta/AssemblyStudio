@@ -10,19 +10,49 @@
 
     <Grid Background="#FF1F1F1F">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="80" />
             <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
         <!-- Nav -->
-        <Grid>
-            <RichEditBox x:Name="test" TextWrapping="NoWrap" IsEnabled="False" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False"/>
-            
-
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.4*" />
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="0.2*" />
+            </Grid.RowDefinitions>
+            <!-- Top Nav -->
+            <Grid Grid.Row="0">
+                <Button Content="Settings" FontSize="12" Padding="7,5,7,5" Margin="7,0,0,0" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFD8D8D8" BorderThickness="1" FocusVisualSecondaryBrush="#80000000"/>
+            </Grid>
+            <!-- Bottom Nav -->
+            <Grid Grid.Row="1">
+                <Button Content="Save" FontSize="12" Width="30" Height="30" Padding="0,0,0,0" Margin="7,0,0,0" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFD8D8D8" BorderThickness="1" FocusVisualSecondaryBrush="#80000000"/>
+                <Button Content="SaveAll" FontSize="12" Width="30" Height="30" Padding="0,0,0,0" Margin="36,0,0,0" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFD8D8D8" BorderThickness="1" FocusVisualSecondaryBrush="#80000000"/>
+                <Button Content="Run" FontSize="12" Width="30" Height="30" Padding="0,0,0,0" Margin="65,0,0,0" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFD8D8D8" BorderThickness="1" FocusVisualSecondaryBrush="#80000000"/>
+                <Button Content="Build" FontSize="12" Width="30" Height="30" Padding="0,0,0,0" Margin="94,0,0,0" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFD8D8D8" BorderThickness="1" FocusVisualSecondaryBrush="#80000000"/>
+            </Grid>
         </Grid>
-        <StackPanel>
-            <TextBlock Text="Static Text " />
-            <TextBox Text="Editable Text" IsReadOnly="True" />
-            <TextBlock Text=" More Static Text" />
-        </StackPanel>
+        <!-- Main -->
+        <Grid Grid.Row="1">
+            <Grid Margin="10,10,10,10" Background="#FF1A1A1A">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <!-- TextEditorLineIndexer -->
+                <ScrollViewer x:Name="TextEditorLineIndexerScrollViewer" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
+                    <Grid x:Name="LineIndexerGrid" Grid.Column="0" Margin="0, 3, 0, 0" />
+                </ScrollViewer>
+                <!-- TextEditorBlock -->
+                <Grid x:Name="TextEditorBlockGrid" Grid.Column="1">
+                    <!-- TextEditorHelper -->
+                    <ScrollViewer x:Name="TextEditorHelperScrollViewer" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden">
+                        <Grid x:Name="TextEditorHelperGrid" Margin="0, 3, 0, 0" />
+                    </ScrollViewer>
+                    <!-- TextEditor -->
+                    <RichEditBox x:Name="TextEditor" TextWrapping="NoWrap" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" BorderThickness="0" Background="{x:Null}" BorderBrush="{x:Null}" ContentLinkBackgroundColor="{x:Null}" Foreground="#FFD8D8D8" FocusVisualPrimaryBrush="{x:Null}" UseSystemFocusVisuals="False" FocusVisualSecondaryBrush="{x:Null}" ContentLinkForegroundColor="{x:Null}" SelectionChanged="TextEditor_SelectionChanged" FocusVisualPrimaryThickness="0,0,0,0" FocusVisualSecondaryThickness="0,0,0,0" ManipulationCompleted="TextEditor_ManipulationCompleted"/>
+                </Grid>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>
